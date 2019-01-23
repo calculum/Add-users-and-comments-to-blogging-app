@@ -1,0 +1,22 @@
+{
+  "name": "add-users-and-comments-to-blogging-app",
+  "version": "1.0.0",
+  "description": "\"Mongoose CRUD challenge\"",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/calculum/Add-users-and-comments-to-blogging-app.git"
+  },
+  "author": "BO",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/calculum/Add-users-and-comments-to-blogging-app/issues"
+  },
+  "homepage": "https://github.com/calculum/Add-users-and-comments-to-blogging-app#readme",
+  "dependencies": {
+    "uuid": "^3.3.2"
+  }
+}
