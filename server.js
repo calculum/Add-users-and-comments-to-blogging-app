@@ -92,9 +92,44 @@ app.put('/authors/:id', (req, res) => {
   });
 
   Author
-      .findOne({})
+      .findOne({userName: updated.userName || '', _id : {$ne: req.params.id} })
+      .then(author => {
+        if(author){
+          const message = `Username already existed`;
+          console.error(messagge);
+          return res.status(400).send(message);
+        }
+        else {
+          Author
+            .findByIdAndUpdate(req.params.id, { $set: updated }, {new: true})
+            .then(updatedAuthor => {
+              res.status(200).json({
+                id:updatedAuthor.id,
+                name: `${updatedAuthor.firstName} ${updatedAuthor.lastName}`,
+                userName: updatedAuthor.userName
+              });
+            })
+            .catch(err => res.status(500).json({message : err}));
+        }
+      });
+});
 
-})
+app.delete('/authors/:id', (req, res) => {
+  BlogPost
+      .remove({ author: req.params.id})
+      .then(() => {
+        Author
+          .findByIdAndRemove(req.params.id)
+          .then(() => {
+            console.log(`Post deleted by author id \`${req.params.id}\``);
+            res.status(204).json({ message: 'success'});
+          })
+      })
+      .catch(err => {
+        console.error(err);
+        res.status(500).json({ error: 'Deleting process failed.'});
+      });
+});
 
 
 
